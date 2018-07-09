@@ -1,0 +1,1055 @@
+[gd_scene load_steps=12 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_Open_button_up():
+	get_node(\"/root/Node/FileDialog\").show()
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_Select_All_button_up():
+	for i in get_node(\"/root/Node/ScrollContainer/VBoxContainer\").get_children():
+		if i.pressed:
+			pass
+		else:
+			i.pressed = true
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_Deselect_button_up():
+	for i in get_node(\"/root/Node/ScrollContainer/VBoxContainer\").get_children():
+		if i.pressed:
+			i.pressed = false
+		else:
+			pass
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=4]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_Delete_button_up():
+	for i in get_node(\"/root/Node/ScrollContainer/VBoxContainer\").get_children():
+		if i.pressed:
+			i.queue_free()
+		else:
+			pass
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=5]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_Initialize_button_up():
+	get_node(\"/root/Node/ConfirmationDialog\").show()
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=6]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+
+
+
+func _on_Initialize2_button_up():
+	get_node(\"/root/Node/ConfirmationDialog2\").show()
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=7]
+
+script/source = "extends Button
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	self.disabled = true
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+
+
+
+func _on_Progress_Bar_button_up():
+	get_node(\"/root/Node/WindowDialog\").show()
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=8]
+
+script/source = "extends FileDialog
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+var importer = []
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+###OLD FOLDER IMPORTER###
+
+#func _on_FileDialog_dir_selected(dir):
+#	var files = []
+#	var directories = Directory.new()
+#	directories.open(dir)
+#	directories.list_dir_begin()
+#
+#	while true:
+#		var file = directories.get_next()
+#		print(file)
+#		if file == \"\":
+#			break
+#		elif not file.begins_with(\".\"):
+#			files.append(file)
+#
+#	directories.list_dir_end()
+
+#func _on_FileDialog_dir_selected(dir):
+#	var files = []
+#	var directories = Directory.new()
+#	directories.open(dir)
+#	directories.list_dir_begin()
+#
+#	while true:
+#		var file = directories.get_next()
+#		print(file)
+#		if file == \"\":
+#			break
+#		elif not file.begins_with(\".\"):
+#			files.append(file)
+#
+#	directories.list_dir_end()
+
+
+
+
+
+
+func _on_FileDialog_dir_selected(dir):
+	var files = []
+	var sub = \"\"
+	var directories = Directory.new()
+	if directories.open(dir) == OK:
+		directories.list_dir_begin()
+		var file_name = directories.get_next()
+		while (file_name != \"\"):
+			if directories.dir_exists(dir+\"/\"+file_name) == true and file_name.begins_with(\".\") == true:
+				pass
+			elif directories.dir_exists(dir+\"/\"+file_name) == true and file_name.begins_with(\".\") == false:
+				#print(\"Found directory: \" + file_name)
+				print(\"Access!\")
+				_folder_access(files,file_name,directories,dir,sub) #To continue searching through Sub-Folders
+			else:
+				pass
+			
+			if file_name.begins_with(\".\") == false:
+				print(\"Found file: \" + dir+\"/\"+file_name) # This is where it stops...
+				files.append(dir+\"/\"+file_name)
+			elif file_name.begins_with(\".\") == true:
+				pass
+			file_name = directories.get_next()
+	else:
+		print(\"An error occurred when trying to access the path.\")
+
+
+
+func _folder_access(files,file_name,directories,dir,sub):
+	directories.change_dir(dir+\"/\"+file_name)
+	while(file_name != \"\"):
+		
+		#Scans the subfolder for more folder files to enter another folder and 
+		if directories.dir_exists(dir+\"/\"+file_name) == true and file_name.begins_with(\".\") == true:
+			pass
+		elif directories.dir_exists(dir+\"/\"+file_name) == true and file_name.begins_with(\".\") == false:
+			sub = file_name+\"/\"
+			print(\"Access2!\")
+			_folder_access(files,file_name,directories,dir,sub)
+			#print(\"Found directory: \" + file_name)
+		
+		if file_name.begins_with(\".\") == false:
+			print(\"Found file: \" + dir+\"/\"+file_name)
+			files.append(dir+\"/\"+file_name)
+		elif file_name.begins_with(\".\") == true:
+			pass
+		file_name = directories.get_next()
+	return
+
+
+
+
+
+
+
+#	importer.clear()
+#	importer.append(dir)
+#	print(importer[0])
+
+	for i in range(0,(files.size())):
+		#print(files.size())
+		var obj_load = load(\"res://Import_Choice.tscn\").instance()
+		obj_load.text = str(files[i])#dir+\"/\"+files[i])
+		get_node(\"/root/Node/ScrollContainer/VBoxContainer\").add_child(obj_load)
+
+	pass # replace with function body
+
+
+func _on_FileDialog_file_selected(path):
+#	importer.clear()
+#	importer.append(path)
+#	print(importer[0])
+
+	var obj_load = load(\"res://Import_Choice.tscn\").instance()
+	obj_load.text = str(path)
+	get_node(\"/root/Node/ScrollContainer/VBoxContainer\").add_child(obj_load)
+
+	pass # replace with function body
+
+
+func _on_FileDialog_files_selected(paths):
+#	importer.clear()
+#	var counter = 0
+#	for i in paths:
+#		print(paths)
+#		#importer[i] = paths[i]
+
+	for i in range(0,(paths.size())):
+		#print(files.size())
+		var obj_load = load(\"res://Import_Choice.tscn\").instance()
+		obj_load.text = str(paths[i])
+		get_node(\"/root/Node/ScrollContainer/VBoxContainer\").add_child(obj_load)
+
+	pass # replace with function body
+
+
+func _on_FileDialog_confirmed():
+	#var obj_load = load(\"res://Import_Choice.tscn\").instance()
+	
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=9]
+
+script/source = "extends FileDialog
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_FileDialog2_file_selected(path):
+	#print(path)
+	var imported = []
+	imported.clear()
+	var pck_list = get_node(\"/root/Node/ScrollContainer/VBoxContainer\").get_children()
+	if pck_list == null or pck_list.size() < 0:
+		get_node(\"/root/Node/AcceptDialog\").show()
+		print(\"Error\")
+		pass
+	else:
+		for i in range(0,pck_list.size()):
+			imported.append(pck_list[i].text)
+			#print (imported[i])#.get_base_dir())#imported[i])
+		if imported.size() == 0:
+			print(\"Error!\")
+			pass
+		else:
+			#get_node(\"/root/pack\").pck_Packager(imported,path)
+			#$pack.test()
+			#get_node(\"/root/pack\").test()
+			print(\"Pass!\")
+			pass
+		#print(\"Sent\")
+		pass
+	pass # replace with function body"
+
+[sub_resource type="GDScript" id=10]
+
+script/source = "extends ConfirmationDialog
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_ConfirmationDialog_confirmed():
+#	get_node(\"/root/Node/HBoxContainer/Open\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Select All\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Deselect\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Delete\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Initialize\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Initialize2\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Progress Bar\").disabled = false
+#	get_node(\"/root/Node/WindowDialog\").show()
+	get_node(\"/root/Node/FileDialog2\").show()
+	pass # replace with function body
+"
+
+[sub_resource type="GDScript" id=11]
+
+script/source = "extends ConfirmationDialog
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_ConfirmationDialog2_confirmed():
+#	get_node(\"/root/Node/HBoxContainer/Open\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Select All\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Deselect\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Delete\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Initialize\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Initialize2\").disabled = true
+#	get_node(\"/root/Node/HBoxContainer/Progress Bar\").disabled = false
+#	get_node(\"/root/Node/WindowDialog\").show()
+	get_node(\"/root/Node/FileDialog2\").show()
+	pass # replace with function body
+"
+
+[node name="Node" type="Node" index="0"]
+
+[node name="Panel" type="Panel" parent="." index="0"]
+
+anchor_left = 0.02
+anchor_top = 0.19
+anchor_right = 0.98
+anchor_bottom = 0.96
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." index="1"]
+
+anchor_left = 0.03
+anchor_top = 0.2
+anchor_right = 0.97
+anchor_bottom = 0.95
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+scroll_horizontal_enabled = true
+scroll_horizontal = 0
+scroll_vertical_enabled = true
+scroll_vertical = 0
+scroll_deadzone = 0
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Scroll" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="." index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="3"]
+
+anchor_left = 0.02
+anchor_top = 0.1
+anchor_right = 0.98
+anchor_bottom = 0.15
+margin_left = -0.48
+margin_top = -0.999996
+margin_right = -0.519958
+margin_bottom = -0.999992
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="Open" type="Button" parent="HBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 21.0
+margin_right = 159.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Open File/Directory"
+flat = false
+align = 1
+script = SubResource( 1 )
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 163.0
+margin_right = 167.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Select All" type="Button" parent="HBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 171.0
+margin_right = 243.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Select All"
+flat = false
+align = 1
+script = SubResource( 2 )
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 247.0
+margin_right = 251.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Deselect" type="Button" parent="HBoxContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 255.0
+margin_right = 345.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Deselect All"
+flat = false
+align = 1
+script = SubResource( 3 )
+
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 349.0
+margin_right = 353.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Delete" type="Button" parent="HBoxContainer" index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 357.0
+margin_right = 480.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Remove Selected"
+flat = false
+align = 1
+script = SubResource( 4 )
+
+[node name="VSeparator4" type="VSeparator" parent="HBoxContainer" index="7"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 484.0
+margin_right = 488.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin", "custom_constants" ]
+
+[node name="Initialize" type="Button" parent="HBoxContainer" index="8"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 492.0
+margin_right = 650.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Initialize PCK Pack (All)"
+flat = false
+align = 1
+script = SubResource( 5 )
+
+[node name="VSeparator5" type="VSeparator" parent="HBoxContainer" index="9"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 654.0
+margin_right = 658.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin", "custom_constants" ]
+
+[node name="Initialize2" type="Button" parent="HBoxContainer" index="10"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 662.0
+margin_right = 858.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Initialize PCK Pack (Selected)"
+flat = false
+align = 1
+script = SubResource( 6 )
+
+[node name="VSeparator6" type="VSeparator" parent="HBoxContainer" index="11"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 862.0
+margin_right = 866.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin", "custom_constants" ]
+
+[node name="Progress Bar" type="Button" parent="HBoxContainer" index="12"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 870.0
+margin_right = 962.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Progress Bar"
+flat = false
+align = 1
+script = SubResource( 7 )
+
+[node name="FileDialog" type="FileDialog" parent="." index="4"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -348.5
+margin_top = -200.5
+margin_right = 348.5
+margin_bottom = 200.5
+rect_min_size = Vector2( 200, 70 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = true
+window_title = "Open a File or Directory"
+resizable = true
+dialog_hide_on_ok = false
+mode_overrides_title = false
+mode = 3
+access = 2
+filters = PoolStringArray(  )
+show_hidden_files = true
+current_dir = "C:/Godot/bin/Projects/PCPPackager"
+current_file = ""
+current_path = "C:/Godot/bin/Projects/PCPPackager/"
+script = SubResource( 8 )
+_sections_unfolded = [ "Dialog", "Popup" ]
+
+[node name="FileDialog2" type="FileDialog" parent="." index="5"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -348.5
+margin_top = -200.5
+margin_right = 348.5
+margin_bottom = 200.5
+rect_min_size = Vector2( 200, 70 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = true
+window_title = "Save and Compress into .pck"
+resizable = true
+dialog_hide_on_ok = false
+mode_overrides_title = false
+mode = 4
+access = 2
+filters = PoolStringArray(  )
+show_hidden_files = true
+current_dir = "C:/Godot/bin/Projects/PCPPackager"
+current_file = "compressedPCK.pck"
+current_path = "C:/Godot/bin/Projects/PCPPackager/compressedPCK.pck"
+script = SubResource( 9 )
+_sections_unfolded = [ "Popup" ]
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." index="6"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -138.0
+margin_top = -35.0
+margin_right = 138.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 200, 70 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+window_title = "Please Confirm..."
+resizable = false
+dialog_text = "Please confirm for packing files into PCK:"
+dialog_hide_on_ok = true
+script = SubResource( 10 )
+
+[node name="ConfirmationDialog2" type="ConfirmationDialog" parent="." index="7"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -167.5
+margin_top = -35.0
+margin_right = 167.5
+margin_bottom = 35.0
+rect_min_size = Vector2( 200, 70 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+window_title = "Please Confirm..."
+resizable = false
+dialog_text = "Please confirm for packing selected files into PCK:"
+dialog_hide_on_ok = true
+script = SubResource( 11 )
+_sections_unfolded = [ "Dialog" ]
+
+[node name="WindowDialog" type="WindowDialog" parent="." index="8"]
+
+editor/display_folded = true
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -102.4
+margin_top = -18.0
+margin_right = 102.4
+margin_bottom = 18.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+window_title = "Packing to PCK... Please Wait..."
+resizable = false
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WindowDialog" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="ProgressBar" type="ProgressBar" parent="WindowDialog/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 10.0
+margin_right = 244.0
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = false
+percent_visible = true
+_sections_unfolded = [ "Anchor", "Margin", "Percent" ]
+
+[node name="AcceptDialog" type="AcceptDialog" parent="." index="9"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -139.0
+margin_top = -29.0
+margin_right = 139.0
+margin_bottom = 29.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+window_title = "Alert!"
+resizable = false
+dialog_text = "Error! There are no files to compress into"
+dialog_hide_on_ok = true
+_sections_unfolded = [ "Dialog" ]
+
+[connection signal="button_up" from="HBoxContainer/Open" to="HBoxContainer/Open" method="_on_Open_button_up"]
+
+[connection signal="button_up" from="HBoxContainer/Select All" to="HBoxContainer/Select All" method="_on_Select_All_button_up"]
+
+[connection signal="button_up" from="HBoxContainer/Deselect" to="HBoxContainer/Deselect" method="_on_Deselect_button_up"]
+
+[connection signal="button_up" from="HBoxContainer/Delete" to="HBoxContainer/Delete" method="_on_Delete_button_up"]
+
+[connection signal="button_up" from="HBoxContainer/Initialize" to="HBoxContainer/Initialize" method="_on_Initialize_button_up"]
+
+[connection signal="button_up" from="HBoxContainer/Initialize2" to="HBoxContainer/Initialize2" method="_on_Initialize2_button_up"]
+
+[connection signal="button_up" from="HBoxContainer/Progress Bar" to="HBoxContainer/Progress Bar" method="_on_Progress_Bar_button_up"]
+
+[connection signal="confirmed" from="FileDialog" to="FileDialog" method="_on_FileDialog_confirmed"]
+
+[connection signal="dir_selected" from="FileDialog" to="FileDialog" method="_on_FileDialog_dir_selected"]
+
+[connection signal="file_selected" from="FileDialog" to="FileDialog" method="_on_FileDialog_file_selected"]
+
+[connection signal="files_selected" from="FileDialog" to="FileDialog" method="_on_FileDialog_files_selected"]
+
+[connection signal="file_selected" from="FileDialog2" to="FileDialog2" method="_on_FileDialog2_file_selected"]
+
+[connection signal="confirmed" from="ConfirmationDialog" to="ConfirmationDialog" method="_on_ConfirmationDialog_confirmed"]
+
+[connection signal="confirmed" from="ConfirmationDialog2" to="ConfirmationDialog2" method="_on_ConfirmationDialog2_confirmed"]
+
+
