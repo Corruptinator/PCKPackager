@@ -252,22 +252,17 @@ func _on_FileDialog_dir_selected(dir):
 	var sub = \"\"
 	var directories = Directory.new()
 	if directories.open(dir) == OK:
-		directories.list_dir_begin()
+		directories.list_dir_begin(true) #Left on true eliminates '.' and '..' (parent) directories.
 		var file_name = directories.get_next()
 		while (file_name != \"\"):
-			if directories.dir_exists(dir+\"/\"+file_name) == true and file_name.begins_with(\".\") == true:
-				pass
-			elif directories.dir_exists(dir+\"/\"+file_name) == true and file_name.begins_with(\".\") == false:
+			if directories.current_is_dir() == true:
 				#print(\"Found directory: \" + file_name)
-				print(\"Access!\")
-				_folder_access(files,file_name,directories,dir,sub) #To continue searching through Sub-Folders
+				print(\"Access at:\" + directories.get_current_dir() + \"/\" + file_name)
+				directories.change_dir(directories.get_current_dir() + \"/\" + file_name)
+			elif directories.current_is_dir() == false:
+				print(\"Found file: \" + directories.get_current_dir() + \"/\" + file_name)
+				files.append(directories.get_current_dir() + \"/\" + file_name)
 			else:
-				pass
-			
-			if file_name.begins_with(\".\") == false:
-				print(\"Found file: \" + dir+\"/\"+file_name) # This is where it stops...
-				files.append(dir+\"/\"+file_name)
-			elif file_name.begins_with(\".\") == true:
 				pass
 			file_name = directories.get_next()
 	else:
@@ -275,26 +270,20 @@ func _on_FileDialog_dir_selected(dir):
 
 
 
-func _folder_access(files,file_name,directories,dir,sub):
-	directories.change_dir(dir+\"/\"+file_name)
-	while(file_name != \"\"):
-		
-		#Scans the subfolder for more folder files to enter another folder and 
-		if directories.dir_exists(dir+\"/\"+file_name) == true and file_name.begins_with(\".\") == true:
-			pass
-		elif directories.dir_exists(dir+\"/\"+file_name) == true and file_name.begins_with(\".\") == false:
-			sub = file_name+\"/\"
-			print(\"Access2!\")
-			_folder_access(files,file_name,directories,dir,sub)
-			#print(\"Found directory: \" + file_name)
-		
-		if file_name.begins_with(\".\") == false:
-			print(\"Found file: \" + dir+\"/\"+file_name)
-			files.append(dir+\"/\"+file_name)
-		elif file_name.begins_with(\".\") == true:
-			pass
-		file_name = directories.get_next()
-	return
+#func _folder_access(files,file_name,directories,dir,sub):
+#	#directories.change_dir(dir+\"/\"+file_name)
+#	while(file_name != \"\"):
+#		if directories.current_is_dir() == true:
+#			#print(\"Found directory: \" + file_name)
+#			print(\"Access2!\")
+#			_folder_access(files,file_name,directories,dir,sub) #To continue searching through Sub-Folders
+#		elif directories.current_is_dir() == false:
+#			print(\"Found file: \" + file_name) # This is where it stops...
+#			files.append(file_name)
+#		else:
+#			pass
+#		file_name = directories.get_next()
+#	return
 
 
 
@@ -847,9 +836,9 @@ mode = 3
 access = 2
 filters = PoolStringArray(  )
 show_hidden_files = true
-current_dir = "C:/Godot/bin/Projects/PCPPackager"
+current_dir = "C:/Godot/bin/Projects/PCKPackager"
 current_file = ""
-current_path = "C:/Godot/bin/Projects/PCPPackager/"
+current_path = "C:/Godot/bin/Projects/PCKPackager/"
 script = SubResource( 8 )
 _sections_unfolded = [ "Dialog", "Popup" ]
 
@@ -880,9 +869,9 @@ mode = 4
 access = 2
 filters = PoolStringArray(  )
 show_hidden_files = true
-current_dir = "C:/Godot/bin/Projects/PCPPackager"
+current_dir = "C:/Godot/bin/Projects/PCKPackager"
 current_file = "compressedPCK.pck"
-current_path = "C:/Godot/bin/Projects/PCPPackager/compressedPCK.pck"
+current_path = "C:/Godot/bin/Projects/PCKPackager/compressedPCK.pck"
 script = SubResource( 9 )
 _sections_unfolded = [ "Popup" ]
 
