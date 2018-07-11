@@ -207,93 +207,35 @@ func _ready():
 #	# Update game logic here.
 #	pass
 
-
-###OLD FOLDER IMPORTER###
-
-#func _on_FileDialog_dir_selected(dir):
-#	var files = []
-#	var directories = Directory.new()
-#	directories.open(dir)
-#	directories.list_dir_begin()
-#
-#	while true:
-#		var file = directories.get_next()
-#		print(file)
-#		if file == \"\":
-#			break
-#		elif not file.begins_with(\".\"):
-#			files.append(file)
-#
-#	directories.list_dir_end()
-
-#func _on_FileDialog_dir_selected(dir):
-#	var files = []
-#	var directories = Directory.new()
-#	directories.open(dir)
-#	directories.list_dir_begin()
-#
-#	while true:
-#		var file = directories.get_next()
-#		print(file)
-#		if file == \"\":
-#			break
-#		elif not file.begins_with(\".\"):
-#			files.append(file)
-#
-#	directories.list_dir_end()
-
-
+func scan_dir(path): ### Special thanks to \"Unnamed\" at Godot Developers Forum for solution!
+    var file_name
+    var files = []
+    var dir = Directory.new()
+    var error = dir.open(path)
+    if error!=OK:
+        print(\"Can't open \"+path+\"!\")
+        return
+    dir.list_dir_begin(true)
+    file_name = dir.get_next()
+    while file_name!=\"\":
+        if dir.current_is_dir():
+            var new_path = path+\"/\"+file_name
+            print(\"Found directory \"+new_path+\".\")
+            files += scan_dir(new_path)
+        else:
+            var name = path+\"/\"+file_name
+            print(name)
+            files.push_back(name)
+        file_name = dir.get_next()
+    dir.list_dir_end()
+    return files
 
 
 
 
 func _on_FileDialog_dir_selected(dir):
-	var files = []
-	var sub = \"\"
-	var directories = Directory.new()
-	if directories.open(dir) == OK:
-		directories.list_dir_begin(true) #Left on true eliminates '.' and '..' (parent) directories.
-		var file_name = directories.get_next()
-		while (file_name != \"\"):
-			if directories.current_is_dir() == true:
-				#print(\"Found directory: \" + file_name)
-				print(\"Access at:\" + directories.get_current_dir() + \"/\" + file_name)
-				directories.change_dir(directories.get_current_dir() + \"/\" + file_name)
-			elif directories.current_is_dir() == false:
-				print(\"Found file: \" + directories.get_current_dir() + \"/\" + file_name)
-				files.append(directories.get_current_dir() + \"/\" + file_name)
-			else:
-				pass
-			file_name = directories.get_next()
-	else:
-		print(\"An error occurred when trying to access the path.\")
 
-
-
-#func _folder_access(files,file_name,directories,dir,sub):
-#	#directories.change_dir(dir+\"/\"+file_name)
-#	while(file_name != \"\"):
-#		if directories.current_is_dir() == true:
-#			#print(\"Found directory: \" + file_name)
-#			print(\"Access2!\")
-#			_folder_access(files,file_name,directories,dir,sub) #To continue searching through Sub-Folders
-#		elif directories.current_is_dir() == false:
-#			print(\"Found file: \" + file_name) # This is where it stops...
-#			files.append(file_name)
-#		else:
-#			pass
-#		file_name = directories.get_next()
-#	return
-
-
-
-
-
-
-
-#	importer.clear()
-#	importer.append(dir)
-#	print(importer[0])
+	var files = scan_dir(dir)
 
 	for i in range(0,(files.size())):
 		#print(files.size())
@@ -302,6 +244,7 @@ func _on_FileDialog_dir_selected(dir):
 		get_node(\"/root/Node/ScrollContainer/VBoxContainer\").add_child(obj_load)
 
 	pass # replace with function body
+
 
 
 func _on_FileDialog_file_selected(path):
